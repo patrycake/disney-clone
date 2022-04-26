@@ -1,5 +1,9 @@
 import React from "react";
 import style from "styled-components";
+import { loginWithGoogle } from "../firebase";
+import { setUserLoginState } from "../features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import logo from "../images/logo.svg";
 import homeImg from "../images/home-icon.svg";
 import searchImg from "../images/search-icon.svg";
@@ -9,6 +13,20 @@ import moviesImg from "../images/movie-icon.svg";
 import seriesImg from "../images/series-icon.svg";
 
 function Header() {
+  const dispatch = useDispatch();
+
+  async function loginClick() {
+    const user = await loginWithGoogle();
+    console.log(user);
+    dispatch(
+      setUserLoginState({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+      })
+    );
+  }
+
   return (
     <Nav>
       <Logo href="/">
@@ -40,7 +58,7 @@ function Header() {
           <span>SERIES</span>
         </a>
       </NavMenu>
-      <Login>Login</Login>
+      <Login onClick={loginClick}>Login</Login>
     </Nav>
   );
 }
