@@ -179,6 +179,8 @@ transition: all 0.2s ease 0s;
     color:rgba(0,0,0,0.5);
 }`;
 
-const UserImg = style.img``;
+const UserImg = style.img`
+height: 100%;
+border-radius: 4px;`;
 
 export default Header;
