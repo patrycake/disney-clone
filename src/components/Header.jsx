@@ -14,6 +14,8 @@ import seriesImg from "../images/series-icon.svg";
 
 function Header() {
   const dispatch = useDispatch();
+  const userName = useSelector((state) => state.user.name);
+  const userPhoto = useSelector((state) => state.user.photo);
 
   async function loginClick() {
     const user = await loginWithGoogle();
@@ -32,33 +34,39 @@ function Header() {
       <Logo href="/">
         <img src={logo} alt="" />
       </Logo>
-      <NavMenu>
-        <a href="/home">
-          <img src={homeImg} alt="HOME" />
-          <span>HOME</span>
-        </a>
-        <a href="/home">
-          <img src={searchImg} alt="HOME" />
-          <span>SEARCH</span>
-        </a>
-        <a href="/home">
-          <img src={watchlistImg} alt="HOME" />
-          <span>WATCHLIST</span>
-        </a>
-        <a href="/home">
-          <img src={originalsImg} alt="HOME" />
-          <span>ORIGINALS</span>
-        </a>
-        <a href="/home">
-          <img src={moviesImg} alt="HOME" />
-          <span>MOVIES</span>
-        </a>
-        <a href="/home">
-          <img src={seriesImg} alt="HOME" />
-          <span>SERIES</span>
-        </a>
-      </NavMenu>
-      <Login onClick={loginClick}>Login</Login>
+      {!userName ? (
+        <LoginButton onClick={loginClick}>Login</LoginButton>
+      ) : (
+        <>
+          <NavMenu>
+            <a href="/home">
+              <img src={homeImg} alt="HOME" />
+              <span>HOME</span>
+            </a>
+            <a href="/home">
+              <img src={searchImg} alt="HOME" />
+              <span>SEARCH</span>
+            </a>
+            <a href="/home">
+              <img src={watchlistImg} alt="HOME" />
+              <span>WATCHLIST</span>
+            </a>
+            <a href="/home">
+              <img src={originalsImg} alt="HOME" />
+              <span>ORIGINALS</span>
+            </a>
+            <a href="/home">
+              <img src={moviesImg} alt="HOME" />
+              <span>MOVIES</span>
+            </a>
+            <a href="/home">
+              <img src={seriesImg} alt="HOME" />
+              <span>SERIES</span>
+            </a>
+          </NavMenu>
+          <UserImg src={userPhoto} />
+        </>
+      )}
     </Nav>
   );
 }
@@ -156,7 +164,7 @@ a {
     }
 }`;
 
-const Login = style.a`
+const LoginButton = style.a`
 background-color: rgba(0,0,0,0.5);
 padding: 8px 16px;
 border: 1px solid #f9f9f9;
@@ -170,5 +178,7 @@ transition: all 0.2s ease 0s;
     background-color:#f9f9f9;
     color:rgba(0,0,0,0.5);
 }`;
+
+const UserImg = style.img``;
 
 export default Header;
