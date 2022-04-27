@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "styled-components";
-import { loginWithGoogle } from "../firebase";
+import { auth, provider } from "../firebase";
 import { setUserLoginState } from "../features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 import logo from "../images/logo.svg";
 import homeImg from "../images/home-icon.svg";
@@ -16,10 +23,18 @@ function Header() {
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.user.name);
   const userPhoto = useSelector((state) => state.user.photo);
+  let navigate = useNavigate();
 
-  async function loginClick() {
-    const user = await loginWithGoogle();
-    console.log(user);
+  const loginWithGoogle = async () => {
+    try {
+      const res = await signInWithPopup(auth, provider);
+      setUser(res.user);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  async function setUser(user) {
     dispatch(
       setUserLoginState({
         name: user.displayName,
@@ -29,13 +44,23 @@ function Header() {
     );
   }
 
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      console.log("onAuthStateChanged");
+      if (user) {
+        setUser(user);
+        navigate("/home");
+      }
+    });
+  }, [userName]);
+
   return (
     <Nav>
       <Logo href="/">
         <img src={logo} alt="" />
       </Logo>
       {!userName ? (
-        <LoginButton onClick={loginClick}>Login</LoginButton>
+        <LoginButton onClick={loginWithGoogle}>Login</LoginButton>
       ) : (
         <>
           <NavMenu>

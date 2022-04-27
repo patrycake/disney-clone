@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import {
     getFirestore,
@@ -34,28 +34,34 @@ provider.setCustomParameters({
 });
 const storage = getStorage(app);
 
-const loginWithGoogle = async () => {
-    try {
-        const res = await signInWithPopup(auth, provider);
 
-        const user = res.user;
-        // const q = query(collection(db, "users"), where("uid", "==", user.uid));
-        // const docs = await getDocs(q);
-        // if (docs.docs.length === 0) {
-        //     await addDoc(collection(db, "users"), {
-        //         uid: user.uid,
-        //         name: user.displayName,
-        //         authProvider: "google",
-        //         email: user.email,
-        //     });
-        // }
-        return user;
-    } catch (err) {
-        console.error(err);
-    }
-};
+
+// const loginWithGoogle = async () => {
+//     try {
+//         await signInWithPopup(auth, provider)
+//         // const res = await signInWithPopup(auth, provider);
 
 
 
-export { auth, provider, storage, user, loginWithGoogle }
+
+
+//         // const user = res.user;
+//         // const q = query(collection(db, "users"), where("uid", "==", user.uid));
+//         // const docs = await getDocs(q);
+//         // if (docs.docs.length === 0) {
+//         //     await addDoc(collection(db, "users"), {
+//         //         uid: user.uid,
+//         //         name: user.displayName,
+//         //         authProvider: "google",
+//         //         email: user.email,
+//         //     });
+//         // }
+//     } catch (err) {
+//         console.error(err);
+//     }
+// };
+
+
+
+export { auth, provider, storage, user }
 export default db;

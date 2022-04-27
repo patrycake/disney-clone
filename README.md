@@ -19,3 +19,7 @@ Instead of Redux we could use the useContext and useReducer hooks, there is a lo
 ## Firebase
 
 Can use firebase hooks with https://github.com/csfrequency/react-firebase-hooks/tree/edab3f3f3b5ec01c8aafcc6096755dfcc69e4408/auth#useauthstate
+
+## React Router
+
+- Authentication redirect and guard Example from the React Router Documentation: https://stackblitz.com/github/remix-run/react-router/tree/main/examples/auth?file=src/App.tsx
