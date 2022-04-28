@@ -1,17 +1,20 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import Login from "./components/Login"
+import { useSelector } from 'react-redux';
 import './App.css';
+import Bundle from "./components/Bundle"
 import Header from './components/Header';
 import Home from './components/Home';
-import { useSelector } from 'react-redux';
+import Login from "./components/Login"
+
 
 function App() {
   return (
     <BrowserRouter >
       <Header />
       <Routes>
-        <Route path='/' element={<Login />} />
-        {/* <Route path="/home" element={<RequireAuth component={Home} />} /> */}
+        <Route path='/' element={<Bundle />} />
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="/dashboard" element={<RequireAuth component={Home} />} /> */}
         <Route path='/home' element={<Home />} />
       </Routes>
     </BrowserRouter>

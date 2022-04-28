@@ -6,6 +6,7 @@
 - styled components
 - react-router
 - firebase
+- react-slick
 
 ## Purpose of Redux
 

@@ -49,7 +49,7 @@ function Header() {
       console.log("onAuthStateChanged");
       if (user) {
         setUser(user);
-        navigate("/home");
+        // navigate("/dashboard");
       }
     });
   }, [userName]);
@@ -64,35 +64,34 @@ function Header() {
       ) : (
         <>
           <NavMenu>
-            <a href="/home">
-              <img src={homeImg} alt="HOME" />
-              <span>HOME</span>
-            </a>
-            <a href="/home">
-              <img src={searchImg} alt="HOME" />
-              <span>SEARCH</span>
-            </a>
-            <a href="/home">
-              <img src={watchlistImg} alt="HOME" />
-              <span>WATCHLIST</span>
-            </a>
-            <a href="/home">
-              <img src={originalsImg} alt="HOME" />
-              <span>ORIGINALS</span>
-            </a>
-            <a href="/home">
-              <img src={moviesImg} alt="HOME" />
-              <span>MOVIES</span>
-            </a>
-            <a href="/home">
-              <img src={seriesImg} alt="HOME" />
-              <span>SERIES</span>
-            </a>
+            <NavItem location="/home" src={homeImg} text="HOME" />
+            <NavItem location="/search" src={searchImg} text="SEARCH" />
+            <NavItem
+              location="/watchlist"
+              src={watchlistImg}
+              text="WATCHLIST"
+            />
+            <NavItem
+              location="/originals"
+              src={originalsImg}
+              text="ORIGINALS"
+            />
+            <NavItem location="/movies" src={moviesImg} text="MOVIES" />
+            <NavItem location="/series" src={seriesImg} text="SERIES" />
           </NavMenu>
           <UserImg src={userPhoto} />
         </>
       )}
     </Nav>
+  );
+}
+
+function NavItem({ location, src, text }) {
+  return (
+    <a href={location}>
+      <img src={src} alt="HOME" />
+      <span>{text}</span>
+    </a>
   );
 }
 
