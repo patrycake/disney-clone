@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import {
     getFirestore,
@@ -34,6 +34,10 @@ provider.setCustomParameters({
 });
 const storage = getStorage(app);
 
+const logout = () => {
+    signOut(auth);
+};
+
 
 
 // const loginWithGoogle = async () => {
@@ -63,5 +67,5 @@ const storage = getStorage(app);
 
 
 
-export { auth, provider, storage, user }
+export { auth, provider, storage, user, logout }
 export default db;

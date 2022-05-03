@@ -10,12 +10,10 @@ import Login from "./components/Login"
 function App() {
   return (
     <BrowserRouter >
-      <Header />
       <Routes>
         <Route path='/' element={<Bundle />} />
+        <Route path='home' element={<Home />} />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/dashboard" element={<RequireAuth component={Home} />} /> */}
-        <Route path='/home' element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

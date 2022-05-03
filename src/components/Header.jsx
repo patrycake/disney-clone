@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import style from "styled-components";
-import { auth, provider } from "../firebase";
-import { setUserLoginState } from "../features/user/userSlice";
+import { auth, provider, logout } from "../firebase";
+import { setUserLoginState, setSignOutState } from "../features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { Outlet, useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -21,18 +22,23 @@ import seriesImg from "../images/series-icon.svg";
 
 function Header() {
   const dispatch = useDispatch();
-  const userName = useSelector((state) => state.user.name);
   const userPhoto = useSelector((state) => state.user.photo);
+  const userName = useSelector((state) => state.user.name);
   let navigate = useNavigate();
 
-  const loginWithGoogle = async () => {
-    try {
-      const res = await signInWithPopup(auth, provider);
-      setUser(res.user);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      console.log("onAuthStateChanged");
+      console.log(user);
+      if (user) {
+        setUser(user);
+        navigate("/home");
+      } else {
+        dispatch(setSignOutState());
+        navigate("/");
+      }
+    });
+  }, [userName]);
 
   async function setUser(user) {
     dispatch(
@@ -44,56 +50,78 @@ function Header() {
     );
   }
 
-  useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      console.log("onAuthStateChanged");
-      if (user) {
-        setUser(user);
-        // navigate("/dashboard");
-      }
-    });
-  }, [userName]);
-
   return (
     <Nav>
-      <Logo href="/">
+      <Logo to="/">
         <img src={logo} alt="" />
       </Logo>
-      {!userName ? (
-        <LoginButton onClick={loginWithGoogle}>Login</LoginButton>
-      ) : (
-        <>
-          <NavMenu>
-            <NavItem location="/home" src={homeImg} text="HOME" />
-            <NavItem location="/search" src={searchImg} text="SEARCH" />
-            <NavItem
-              location="/watchlist"
-              src={watchlistImg}
-              text="WATCHLIST"
-            />
-            <NavItem
-              location="/originals"
-              src={originalsImg}
-              text="ORIGINALS"
-            />
-            <NavItem location="/movies" src={moviesImg} text="MOVIES" />
-            <NavItem location="/series" src={seriesImg} text="SERIES" />
-          </NavMenu>
-          <UserImg src={userPhoto} />
-        </>
-      )}
+      <NavMenu>
+        <NavItem location="/home" src={homeImg} text="HOME" />
+        <NavItem location="/search" src={searchImg} text="SEARCH" />
+        <NavItem location="/watchlist" src={watchlistImg} text="WATCHLIST" />
+        <NavItem location="/originals" src={originalsImg} text="ORIGINALS" />
+        <NavItem location="/movies" src={moviesImg} text="MOVIES" />
+        <NavItem location="/series" src={seriesImg} text="SERIES" />
+      </NavMenu>
+      <SignOut>
+        <UserImg src={userPhoto} />
+        <DropDown>
+          <span onClick={logout}>Sign Out</span>
+        </DropDown>
+      </SignOut>
     </Nav>
   );
 }
 
 function NavItem({ location, src, text }) {
   return (
-    <a href={location}>
+    <Link to={location}>
       <img src={src} alt="HOME" />
       <span>{text}</span>
-    </a>
+    </Link>
   );
 }
+
+const UserImg = style.img`
+height: 100%; `;
+
+const DropDown = style.div`
+position: absolute;
+top: 48px;
+right: 0px;
+background-color: rgb(19,19,19);
+border: 1px solid rgba(151,151,151, 0.34);
+border-radius: 4px;
+box-shadow: rgb(0 0 0 /50%) 0 0 18px 0;
+padding: 10px;
+font-size: 14px;
+letter-spacing: 3px;
+width: 120px;
+text-align: center;
+opacity: 0;
+`;
+
+const SignOut = style.div`
+position: relative;
+height: 48px;
+width: 48px;
+display: flex;
+cursor: pointer;
+aling-items: center;
+justify-content: center;
+
+${UserImg} {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+&:hover{
+  ${DropDown}{
+    opacity: 1;
+    transition-duration: 1s;
+  }
+}`;
 
 const Nav = style.nav`
 position: fixed;
@@ -110,7 +138,7 @@ letter-spacing: 16px;
 z-index: 3;
 `;
 
-const Logo = style.a`
+const Logo = style(Link)`
 padding: 0;
 width: 80px;
 margin-top:4px;
@@ -187,24 +215,5 @@ a {
         display:none
     }
 }`;
-
-const LoginButton = style.a`
-background-color: rgba(0,0,0,0.5);
-padding: 8px 16px;
-border: 1px solid #f9f9f9;
-border-radius: 4px;
-letter-spacing: 1.5px;
-line-height: 1.08;
-text-transform: uppercase;
-transition: all 0.2s ease 0s;
-
-&:hover{
-    background-color:#f9f9f9;
-    color:rgba(0,0,0,0.5);
-}`;
-
-const UserImg = style.img`
-height: 100%;
-border-radius: 4px;`;
 
 export default Header;
