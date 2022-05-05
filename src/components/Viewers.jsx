@@ -38,7 +38,7 @@ function Viewer({ img, vid }) {
 
 const Container = styled.div`
   margin-top: 30px;
-  padding: 30px 0px 26px;
+  padding: 5px 0px 26px;
   display: grid;
   grid-gap: 25px;
   gap: 25px;

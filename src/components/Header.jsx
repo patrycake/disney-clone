@@ -1,16 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import style from "styled-components";
-import { auth, provider, logout } from "../firebase";
-import { setUserLoginState, setSignOutState } from "../features/user/userSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router";
+import { logout } from "../firebase";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  onAuthStateChanged,
-} from "firebase/auth";
 
 import logo from "../images/logo.svg";
 import homeImg from "../images/home-icon.svg";
@@ -21,34 +13,7 @@ import moviesImg from "../images/movie-icon.svg";
 import seriesImg from "../images/series-icon.svg";
 
 function Header() {
-  const dispatch = useDispatch();
   const userPhoto = useSelector((state) => state.user.photo);
-  const userName = useSelector((state) => state.user.name);
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      console.log("onAuthStateChanged");
-      console.log(user);
-      if (user) {
-        setUser(user);
-        navigate("/home");
-      } else {
-        dispatch(setSignOutState());
-        navigate("/");
-      }
-    });
-  }, [userName]);
-
-  async function setUser(user) {
-    dispatch(
-      setUserLoginState({
-        name: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-      })
-    );
-  }
 
   return (
     <Nav>
@@ -63,6 +28,7 @@ function Header() {
         <NavItem location="/movies" src={moviesImg} text="MOVIES" />
         <NavItem location="/series" src={seriesImg} text="SERIES" />
       </NavMenu>
+      <p>Profile</p>
       <SignOut>
         <UserImg src={userPhoto} />
         <DropDown>
@@ -136,6 +102,12 @@ align-items: center;
 padding: 0 36px;
 letter-spacing: 16px;
 z-index: 3;
+
+p{
+  letter-spacing: 1.42px;
+  line-height: 1.08;
+  padding-right: 5px;
+}
 `;
 
 const Logo = style(Link)`

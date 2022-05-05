@@ -4,7 +4,6 @@ import bg from "../images/home-background.png";
 import ImageSlider from "./ImageSlider";
 import Viewers from "./Viewers";
 import Header from "./Header";
-import Recommends from "./Recommends";
 import MovieRow from "./MovieRow";
 
 function Home() {
@@ -14,11 +13,10 @@ function Home() {
       <Container>
         <ImageSlider />
         <Viewers />
-        {/* <Recommends /> */}
-        <MovieRow title="New to Disney+" type="new" />
-        {/* <MovieRow title="Recommended for you" type="recommends" /> */}
-        {/* <MovieRow title="Animated Movies" type="animated" /> */}
-        {/* <MovieRow title="Action and Adventure" type="action" /> */}
+        <MovieRow title="New to Disney+" type="newDisney" />
+        <MovieRow title="Recommended for you" type="recommends" />
+        <MovieRow title="Originals" type="originals" />
+        <MovieRow title="Trending" type="trending" />
       </Container>
     </div>
   );

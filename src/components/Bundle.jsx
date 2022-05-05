@@ -1,46 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { auth, provider, logout } from "../firebase";
-import { setUserLoginState, setSignOutState } from "../features/user/userSlice";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  onAuthStateChanged,
-} from "firebase/auth";
 
 import bgImg from "../images/login-background.jpg";
 import ctaOneImg from "../images/cta-logo-one.svg";
 import ctaTwoImg from "../images/cta-logo-two.png";
 
 function Bundle() {
-  const dispatch = useDispatch();
-  const userName = useSelector((state) => state.user.name);
   let navigate = useNavigate();
-
-  async function setUser(user) {
-    dispatch(
-      setUserLoginState({
-        name: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-      })
-    );
-  }
-
-  useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      console.log("onAuthStateChanged");
-      console.log(user);
-      if (user) {
-        setUser(user);
-        navigate("/home");
-      }
-    });
-  }, [userName]);
 
   return (
     <Section>

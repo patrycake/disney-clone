@@ -5,17 +5,15 @@ import google from "../images/google-brands.svg";
 import facebook from "../images/facebook-f-brands.svg";
 import twitter from "../images/twitter-brands.svg";
 
-import { useEffect } from "react";
 import { setUserLoginState } from "../features/user/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { auth, provider } from "../firebase";
-import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { Link } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
-  const userName = useSelector((state) => state.user.name);
   let navigate = useNavigate();
 
   const loginWithGoogle = async () => {
@@ -37,16 +35,6 @@ function Login() {
       })
     );
   }
-
-  useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      console.log("onAuthStateChanged");
-      if (user) {
-        setUser(user);
-        navigate("/home");
-      }
-    });
-  }, [userName]);
 
   return (
     <Container>

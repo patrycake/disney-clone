@@ -88,7 +88,7 @@ const Wrap = styled.div`
 `;
 
 const Carousel = styled(Slider)`
-  margin-top: 20px;
+  margin-top: 10px;
 
   & > button {
     opacity: 0;

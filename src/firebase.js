@@ -38,34 +38,5 @@ const logout = () => {
     signOut(auth);
 };
 
-
-
-// const loginWithGoogle = async () => {
-//     try {
-//         await signInWithPopup(auth, provider)
-//         // const res = await signInWithPopup(auth, provider);
-
-
-
-
-
-//         // const user = res.user;
-//         // const q = query(collection(db, "users"), where("uid", "==", user.uid));
-//         // const docs = await getDocs(q);
-//         // if (docs.docs.length === 0) {
-//         //     await addDoc(collection(db, "users"), {
-//         //         uid: user.uid,
-//         //         name: user.displayName,
-//         //         authProvider: "google",
-//         //         email: user.email,
-//         //     });
-//         // }
-//     } catch (err) {
-//         console.error(err);
-//     }
-// };
-
-
-
 export { auth, provider, storage, user, logout }
 export default db;

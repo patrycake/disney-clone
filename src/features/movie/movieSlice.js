@@ -1,29 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    recommend: null,
-    newDisney: null,
-    original: null,
-    trending: null
+    title: null,
+    img: null,
+    backdrop: null,
+    overview: null,
+    date: null,
 }
 
 const movieSlice = createSlice({
     name: 'movie',
     initialState,
     reducers: {
-        setMovies: (state, action) => {
-            state.recommend = action.payload.recommend;
-            state.newDisney = action.payload.newDisney;
-            state.original = action.payload.original;
-            state.trending = action.payload.trending;
+        setMovie: (state, action) => {
+            state.title = action.payload.title;
+            state.img = action.payload.img;
+            state.backdrop = action.payload.backdrop;
+            state.overview = action.payload.overview;
+            state.date = action.payload.date;
         }
     }
 })
 
-export const { setMovies } = movieSlice.actions;
-export const recommendState = state => state.movie.recommend;
-export const newDisneyState = state => state.movie.newDisney;
-export const originalState = state => state.movie.original;
-export const trendingState = state => state.movie.trending;
+export const { setMovie } = movieSlice.actions;
+export const titleState = state => state.movie.title;
+export const imgState = state => state.movie.img;
+export const backdropState = state => state.movie.backdrop;
+export const overviewState = state => state.movie.overview;
+export const dateState = state => state.movie.date;
 
-export default movieSlice.reducers
+export default movieSlice.reducer;
