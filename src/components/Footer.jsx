@@ -27,8 +27,9 @@ export default Footer;
 const Content = styled.div`
   text-align: center;
   color: rgba(249, 249, 249, 0.5);
-  padding-top: 50px;
-
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
   a {
     text-decoration: underline 0.15em rgba(249, 249, 249, 0.2);
     text-underline-offset: 0.2em;

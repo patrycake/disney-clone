@@ -36,29 +36,28 @@ function MovieDetails() {
   return (
     <div>
       <Header />
-      <Container>
-        <Wrap>
-          <Content>
-            <Title>{title}</Title>
-            <ButtonGroup>
-              <Watch>
-                <img src={play} alt="" />
-                Play
-              </Watch>
-              <Trailer>Trailer</Trailer>
+      <Container />
+      <Wrap>
+        <Content>
+          <Title>{title}</Title>
+          <ButtonGroup>
+            <Watch>
+              <img src={play} alt="" />
+              Play
+            </Watch>
+            <Trailer>Trailer</Trailer>
 
-              <CircleButt>
-                <img src={plus} alt="" />
-              </CircleButt>
-              <CircleButt>
-                <img src={group} alt="" />
-              </CircleButt>
-            </ButtonGroup>
-            <Overview>{overview}</Overview>
-          </Content>
-        </Wrap>
+            <CircleButt>
+              <img src={plus} alt="" />
+            </CircleButt>
+            <CircleButt>
+              <img src={group} alt="" />
+            </CircleButt>
+          </ButtonGroup>
+          <Overview>{overview}</Overview>
+        </Content>
         <Footer />
-      </Container>
+      </Wrap>
     </div>
   );
 }
@@ -125,10 +124,18 @@ const Trailer = styled.button`
 const Title = styled.h2`
   font-size: 50px;
   width: 40%;
+
+  @media (max-width: 768px) {
+    font-size: 25px;
+  }
 `;
 const Overview = styled.p`
   width: 70%;
   font-size: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 const Wrap = styled.div`
   position: absolute;
@@ -148,4 +155,5 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: end;
+  -webkit-justify-content: flex-end;
 `;

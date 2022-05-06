@@ -38,7 +38,6 @@ function MovieRow({ title, type }) {
   }
 
   useEffect(() => {
-    console.log("api called", url);
     fetch(url)
       .then((res) => res.json())
       .then((data) =>
@@ -73,9 +72,7 @@ function MovieRow({ title, type }) {
       <Wrap key={uniqid()}>
         <div
           onClick={async () => {
-            console.log(movie.title);
             dispatchMovie(movie);
-            console.log("got to movie");
             navigate("/movie");
           }}
         >
@@ -84,7 +81,6 @@ function MovieRow({ title, type }) {
       </Wrap>
     );
   });
-  console.log(movies);
   return (
     <Container>
       <h3>{title}</h3>

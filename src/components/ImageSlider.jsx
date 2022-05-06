@@ -56,6 +56,7 @@ const Wrap = styled.div`
     position: relative;
     margin: 10px;
     cursor: pointer;
+    border-radius: 4px;
 
     @media (max-width: 768px) {
       padding: 0px;
