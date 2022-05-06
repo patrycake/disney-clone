@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { connect } from "react-redux";
 import { setMovie } from "../features/movie/movieSlice";
-import { Link, useNavigate } from "react-router-dom";
-import { key } from "../secret";
+import { useNavigate } from "react-router-dom";
 import noneImg from "../images/viewers-disney.png";
 import uniqid from "uniqid";
 
@@ -13,7 +11,7 @@ function MovieRow({ title, type }) {
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const url = new URL(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${key}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_MOVIE_KEY}`
   );
   url.searchParams.append("language", "en-US");
   url.searchParams.append("include_adult", "false");

@@ -5,6 +5,7 @@ import ImageSlider from "./ImageSlider";
 import Viewers from "./Viewers";
 import Header from "./Header";
 import MovieRow from "./MovieRow";
+import Footer from "./Footer";
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
         <MovieRow title="Recommended for you" type="recommends" />
         <MovieRow title="Originals" type="originals" />
         <MovieRow title="Trending" type="trending" />
+        <Footer />
       </Container>
     </div>
   );

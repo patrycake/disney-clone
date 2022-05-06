@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import './App.css';
 import Bundle from "./components/Bundle"
 import Home from './components/Home';
@@ -51,14 +51,14 @@ function App() {
   }
 
   return (
-    <BrowserRouter >
+    <HashRouter >
       <Routes>
         <Route path='/' element={<NewUserOnly component={Bundle} />} />
         <Route path='/home' element={<RequireAuth component={Home} />} />
         <Route path="/login" element={<NewUserOnly component={Login} />} />
         <Route path="/movie" element={<RequireAuth component={MovieDetails} />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

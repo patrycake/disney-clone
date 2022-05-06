@@ -6,6 +6,7 @@ import styled from "styled-components";
 import play from "../images/play-icon-black.png";
 import group from "../images/group-icon.png";
 import plus from "../images/watchlist-icon.svg";
+import Footer from "./Footer";
 
 function MovieDetails() {
   const title = useSelector(titleState);
@@ -56,6 +57,7 @@ function MovieDetails() {
             <Overview>{overview}</Overview>
           </Content>
         </Wrap>
+        <Footer />
       </Container>
     </div>
   );

@@ -48,3 +48,7 @@ When wanting to add a border to a container but you DO NOT want to add border to
 use https://www.themoviedb.org/settings/api for movie api fetch image and info.
 
 How to make API keys secret wih deployed with react, and github pages: https://stackoverflow.com/questions/53648652/how-to-use-environment-variables-in-github-page
+
+## Deploy with Firebase
+
+https://medium.com/swlh/how-to-deploy-a-react-app-with-firebase-hosting-98063c5bf425
