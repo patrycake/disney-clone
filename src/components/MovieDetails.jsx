@@ -96,6 +96,11 @@ const Watch = styled.button`
   margin: 5px;
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 50px;
+  }
 
   &:hover {
     background-color: rgba(249, 249, 249, 0.5);
@@ -106,12 +111,18 @@ const Trailer = styled.button`
   padding: 15px 30px;
   width: 130px;
   height: 65px;
+  align-items: center;
   text-transform: uppercase;
   border-radius: 4px;
   border: 2px solid rgb(249, 249, 249);
   background-color: rgba(0, 0, 0, 0.1);
   margin: 5px;
   color: rgb(249, 249, 249);
+
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 50px;
+  }
 
   &:hover {
     background-color: rgba(249, 249, 249, 0.5);
